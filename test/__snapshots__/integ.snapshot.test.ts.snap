@@ -179,6 +179,7 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
+<<<<<<< HEAD
     "AnalyticsAppLogsC8741D7D": Object {
       "DeletionPolicy": "Retain",
       "Properties": Object {
@@ -191,6 +192,12 @@ Object {
       "DependsOn": Array [
         "AnalyticsElasticsearchDomainESLogGroupPolicyCustomResourcePolicy18620FAC",
         "AnalyticsElasticsearchDomainESLogGroupPolicyD87D536C",
+=======
+    "AnalyticsElasticsearchDomain1703D8ED": Object {
+      "DependsOn": Array [
+        "AnalyticsElasticsearchDomainESLogGroupPolicyc84d1f90df20fc947b9f9aad57f8157fbf95be4f6fCustomResourcePolicyECF8AEC3",
+        "AnalyticsElasticsearchDomainESLogGroupPolicyc84d1f90df20fc947b9f9aad57f8157fbf95be4f6fDD7157E0",
+>>>>>>> 3b17f515b3a49ff86d6f75223ae71c04a36ac8c0
       ],
       "Properties": Object {
         "CognitoOptions": Object {
@@ -222,10 +229,20 @@ Object {
           "Enabled": true,
         },
         "LogPublishingOptions": Object {
+<<<<<<< HEAD
           "ES_APPLICATION_LOGS": Object {
             "CloudWatchLogsLogGroupArn": Object {
               "Fn::GetAtt": Array [
                 "AnalyticsAppLogsC8741D7D",
+=======
+          "AUDIT_LOGS": Object {
+            "Enabled": false,
+          },
+          "ES_APPLICATION_LOGS": Object {
+            "CloudWatchLogsLogGroupArn": Object {
+              "Fn::GetAtt": Array [
+                "AnalyticsElasticsearchDomainAppLogs1E6C0316",
+>>>>>>> 3b17f515b3a49ff86d6f75223ae71c04a36ac8c0
                 "Arn",
               ],
             },
@@ -234,7 +251,11 @@ Object {
           "INDEX_SLOW_LOGS": Object {
             "CloudWatchLogsLogGroupArn": Object {
               "Fn::GetAtt": Array [
+<<<<<<< HEAD
                 "AnalyticsSlowIndexLogsD4D980FE",
+=======
+                "AnalyticsElasticsearchDomainSlowIndexLogsB822CCCB",
+>>>>>>> 3b17f515b3a49ff86d6f75223ae71c04a36ac8c0
                 "Arn",
               ],
             },
@@ -243,7 +264,11 @@ Object {
           "SEARCH_SLOW_LOGS": Object {
             "CloudWatchLogsLogGroupArn": Object {
               "Fn::GetAtt": Array [
+<<<<<<< HEAD
                 "AnalyticsSlowSearchLogs06E3F30D",
+=======
+                "AnalyticsElasticsearchDomainSlowSearchLogs94984D80",
+>>>>>>> 3b17f515b3a49ff86d6f75223ae71c04a36ac8c0
                 "Arn",
               ],
             },
@@ -256,6 +281,17 @@ Object {
       },
       "Type": "AWS::Elasticsearch::Domain",
     },
+<<<<<<< HEAD
+=======
+    "AnalyticsElasticsearchDomainAppLogs1E6C0316": Object {
+      "DeletionPolicy": "Retain",
+      "Properties": Object {
+        "RetentionInDays": 30,
+      },
+      "Type": "AWS::Logs::LogGroup",
+      "UpdateReplacePolicy": "Retain",
+    },
+>>>>>>> 3b17f515b3a49ff86d6f75223ae71c04a36ac8c0
     "AnalyticsElasticsearchDomainESAccessPolicyB72C0E7C": Object {
       "DeletionPolicy": "Delete",
       "DependsOn": Array [
@@ -373,7 +409,11 @@ Object {
       },
       "Type": "AWS::IAM::Policy",
     },
+<<<<<<< HEAD
     "AnalyticsElasticsearchDomainESLogGroupPolicyCustomResourcePolicy18620FAC": Object {
+=======
+    "AnalyticsElasticsearchDomainESLogGroupPolicyc84d1f90df20fc947b9f9aad57f8157fbf95be4f6fCustomResourcePolicyECF8AEC3": Object {
+>>>>>>> 3b17f515b3a49ff86d6f75223ae71c04a36ac8c0
       "Properties": Object {
         "PolicyDocument": Object {
           "Statement": Array [
@@ -390,7 +430,11 @@ Object {
           ],
           "Version": "2012-10-17",
         },
+<<<<<<< HEAD
         "PolicyName": "AnalyticsElasticsearchDomainESLogGroupPolicyCustomResourcePolicy18620FAC",
+=======
+        "PolicyName": "AnalyticsElasticsearchDomainESLogGroupPolicyc84d1f90df20fc947b9f9aad57f8157fbf95be4f6fCustomResourcePolicyECF8AEC3",
+>>>>>>> 3b17f515b3a49ff86d6f75223ae71c04a36ac8c0
         "Roles": Array [
           Object {
             "Ref": "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2",
@@ -399,10 +443,17 @@ Object {
       },
       "Type": "AWS::IAM::Policy",
     },
+<<<<<<< HEAD
     "AnalyticsElasticsearchDomainESLogGroupPolicyD87D536C": Object {
       "DeletionPolicy": "Delete",
       "DependsOn": Array [
         "AnalyticsElasticsearchDomainESLogGroupPolicyCustomResourcePolicy18620FAC",
+=======
+    "AnalyticsElasticsearchDomainESLogGroupPolicyc84d1f90df20fc947b9f9aad57f8157fbf95be4f6fDD7157E0": Object {
+      "DeletionPolicy": "Delete",
+      "DependsOn": Array [
+        "AnalyticsElasticsearchDomainESLogGroupPolicyc84d1f90df20fc947b9f9aad57f8157fbf95be4f6fCustomResourcePolicyECF8AEC3",
+>>>>>>> 3b17f515b3a49ff86d6f75223ae71c04a36ac8c0
       ],
       "Properties": Object {
         "Create": Object {
@@ -415,21 +466,33 @@ Object {
                   "{\\"Statement\\":[{\\"Action\\":[\\"logs:PutLogEvents\\",\\"logs:CreateLogStream\\"],\\"Effect\\":\\"Allow\\",\\"Principal\\":{\\"Service\\":\\"es.amazonaws.com\\"},\\"Resource\\":[\\"",
                   Object {
                     "Fn::GetAtt": Array [
+<<<<<<< HEAD
                       "AnalyticsSlowSearchLogs06E3F30D",
+=======
+                      "AnalyticsElasticsearchDomainSlowSearchLogs94984D80",
+>>>>>>> 3b17f515b3a49ff86d6f75223ae71c04a36ac8c0
                       "Arn",
                     ],
                   },
                   "\\",\\"",
                   Object {
                     "Fn::GetAtt": Array [
+<<<<<<< HEAD
                       "AnalyticsSlowIndexLogsD4D980FE",
+=======
+                      "AnalyticsElasticsearchDomainSlowIndexLogsB822CCCB",
+>>>>>>> 3b17f515b3a49ff86d6f75223ae71c04a36ac8c0
                       "Arn",
                     ],
                   },
                   "\\",\\"",
                   Object {
                     "Fn::GetAtt": Array [
+<<<<<<< HEAD
                       "AnalyticsAppLogsC8741D7D",
+=======
+                      "AnalyticsElasticsearchDomainAppLogs1E6C0316",
+>>>>>>> 3b17f515b3a49ff86d6f75223ae71c04a36ac8c0
                       "Arn",
                     ],
                   },
@@ -437,10 +500,17 @@ Object {
                 ],
               ],
             },
+<<<<<<< HEAD
             "policyName": "ESLogPolicy",
           },
           "physicalResourceId": Object {
             "id": "ESLogGroupPolicy",
+=======
+            "policyName": "ESLogPolicyc84d1f90df20fc947b9f9aad57f8157fbf95be4f6f",
+          },
+          "physicalResourceId": Object {
+            "id": "ESLogGroupPolicyc84d1f90df20fc947b9f9aad57f8157fbf95be4f6f",
+>>>>>>> 3b17f515b3a49ff86d6f75223ae71c04a36ac8c0
           },
           "service": "CloudWatchLogs",
         },
@@ -448,7 +518,11 @@ Object {
           "action": "deleteResourcePolicy",
           "ignoreErrorCodesMatching": "400",
           "parameters": Object {
+<<<<<<< HEAD
             "policyName": "ESLogPolicy",
+=======
+            "policyName": "ESLogPolicyc84d1f90df20fc947b9f9aad57f8157fbf95be4f6f",
+>>>>>>> 3b17f515b3a49ff86d6f75223ae71c04a36ac8c0
           },
           "service": "CloudWatchLogs",
         },
@@ -469,21 +543,33 @@ Object {
                   "{\\"Statement\\":[{\\"Action\\":[\\"logs:PutLogEvents\\",\\"logs:CreateLogStream\\"],\\"Effect\\":\\"Allow\\",\\"Principal\\":{\\"Service\\":\\"es.amazonaws.com\\"},\\"Resource\\":[\\"",
                   Object {
                     "Fn::GetAtt": Array [
+<<<<<<< HEAD
                       "AnalyticsSlowSearchLogs06E3F30D",
+=======
+                      "AnalyticsElasticsearchDomainSlowSearchLogs94984D80",
+>>>>>>> 3b17f515b3a49ff86d6f75223ae71c04a36ac8c0
                       "Arn",
                     ],
                   },
                   "\\",\\"",
                   Object {
                     "Fn::GetAtt": Array [
+<<<<<<< HEAD
                       "AnalyticsSlowIndexLogsD4D980FE",
+=======
+                      "AnalyticsElasticsearchDomainSlowIndexLogsB822CCCB",
+>>>>>>> 3b17f515b3a49ff86d6f75223ae71c04a36ac8c0
                       "Arn",
                     ],
                   },
                   "\\",\\"",
                   Object {
                     "Fn::GetAtt": Array [
+<<<<<<< HEAD
                       "AnalyticsAppLogsC8741D7D",
+=======
+                      "AnalyticsElasticsearchDomainAppLogs1E6C0316",
+>>>>>>> 3b17f515b3a49ff86d6f75223ae71c04a36ac8c0
                       "Arn",
                     ],
                   },
@@ -491,10 +577,17 @@ Object {
                 ],
               ],
             },
+<<<<<<< HEAD
             "policyName": "ESLogPolicy",
           },
           "physicalResourceId": Object {
             "id": "ESLogGroupPolicy",
+=======
+            "policyName": "ESLogPolicyc84d1f90df20fc947b9f9aad57f8157fbf95be4f6f",
+          },
+          "physicalResourceId": Object {
+            "id": "ESLogGroupPolicyc84d1f90df20fc947b9f9aad57f8157fbf95be4f6f",
+>>>>>>> 3b17f515b3a49ff86d6f75223ae71c04a36ac8c0
           },
           "service": "CloudWatchLogs",
         },
@@ -502,7 +595,11 @@ Object {
       "Type": "Custom::CloudwatchLogResourcePolicy",
       "UpdateReplacePolicy": "Delete",
     },
+<<<<<<< HEAD
     "AnalyticsSlowIndexLogsD4D980FE": Object {
+=======
+    "AnalyticsElasticsearchDomainSlowIndexLogsB822CCCB": Object {
+>>>>>>> 3b17f515b3a49ff86d6f75223ae71c04a36ac8c0
       "DeletionPolicy": "Retain",
       "Properties": Object {
         "RetentionInDays": 30,
@@ -510,7 +607,11 @@ Object {
       "Type": "AWS::Logs::LogGroup",
       "UpdateReplacePolicy": "Retain",
     },
+<<<<<<< HEAD
     "AnalyticsSlowSearchLogs06E3F30D": Object {
+=======
+    "AnalyticsElasticsearchDomainSlowSearchLogs94984D80": Object {
+>>>>>>> 3b17f515b3a49ff86d6f75223ae71c04a36ac8c0
       "DeletionPolicy": "Retain",
       "Properties": Object {
         "RetentionInDays": 30,
