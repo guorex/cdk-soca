@@ -2,6 +2,118 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.2.16](https://github.com/pahud/cdk-soca/compare/v0.2.15...v0.2.16) (2021-03-06)
+
+### [0.2.15](https://github.com/pahud/cdk-soca/compare/v0.2.14...v0.2.15) (2021-03-05)
+
+### [0.2.14](https://github.com/pahud/cdk-soca/compare/v0.2.13...v0.2.14) (2021-03-04)
+
+### [0.2.13](https://github.com/pahud/cdk-soca/compare/v0.2.12...v0.2.13) (2021-03-03)
+
+### [0.2.12](https://github.com/pahud/cdk-soca/compare/v0.2.11...v0.2.12) (2021-03-02)
+
+### [0.2.11](https://github.com/pahud/cdk-soca/compare/v0.2.10...v0.2.11) (2021-03-01)
+
+### [0.2.10](https://github.com/pahud/cdk-soca/compare/v0.2.9...v0.2.10) (2021-02-28)
+
+### [0.2.9](https://github.com/pahud/cdk-soca/compare/v0.2.8...v0.2.9) (2021-02-27)
+
+### [0.2.8](https://github.com/pahud/cdk-soca/compare/v0.2.7...v0.2.8) (2021-02-26)
+
+### [0.2.7](https://github.com/pahud/cdk-soca/compare/v0.2.6...v0.2.7) (2021-02-25)
+
+### [0.2.6](https://github.com/pahud/cdk-soca/compare/v0.2.5...v0.2.6) (2021-02-25)
+
+### [0.2.5](https://github.com/pahud/cdk-soca/compare/v0.2.4...v0.2.5) (2021-02-23)
+
+### [0.2.4](https://github.com/pahud/cdk-soca/compare/v0.2.3...v0.2.4) (2021-02-21)
+
+### [0.2.3](https://github.com/pahud/cdk-soca/compare/v0.2.2...v0.2.3) (2021-02-20)
+
+### [0.2.2](https://github.com/pahud/cdk-soca/compare/v0.2.1...v0.2.2) (2021-02-19)
+
+### [0.2.1](https://github.com/pahud/cdk-soca/compare/v0.2.0...v0.2.1) (2021-02-18)
+
+### [0.1.136](https://github.com/pahud/cdk-soca/compare/v0.1.135...v0.1.136) (2021-02-18)
+
+
+### Bug Fixes
+
+* unable to create ES domain ([#163](https://github.com/pahud/cdk-soca/issues/163)) ([15fa9fd](https://github.com/pahud/cdk-soca/commit/15fa9fd51cb50411fd8eb98b1da3895cbbb5001e)), closes [#162](https://github.com/pahud/cdk-soca/issues/162) [#161](https://github.com/pahud/cdk-soca/issues/161)
+
+## [0.2.0](https://github.com/pahud/cdk-soca/compare/v0.1.135...v0.2.0) (2021-02-18)
+
+
+### Features
+
+* scope down the ES security group and subnets ([a97ed96](https://github.com/pahud/cdk-soca/commit/a97ed96cb9e8878ac0c61cd121c5275d00ead2e9))
+### [0.1.136](https://github.com/pahud/cdk-soca/compare/v0.1.135...v0.1.136) (2021-02-18)
+
+
+### Bug Fixes
+
+* unable to create ES domain ([8c5fbc2](https://github.com/pahud/cdk-soca/commit/8c5fbc227a50f848c830e163d018de877774c4cd))
+* unable to create ES domain ([#163](https://github.com/pahud/cdk-soca/issues/163)) ([15fa9fd](https://github.com/pahud/cdk-soca/commit/15fa9fd51cb50411fd8eb98b1da3895cbbb5001e)), closes [#162](https://github.com/pahud/cdk-soca/issues/162) [#161](https://github.com/pahud/cdk-soca/issues/161)
+
+### [0.1.135](https://github.com/pahud/cdk-soca/compare/v0.1.134...v0.1.135) (2021-02-18)
+
+### [0.1.134](https://github.com/pahud/cdk-soca/compare/v0.1.133...v0.1.134) (2021-02-18)
+
+
+### Features
+
+* scope down the ES security group and subnets ([#159](https://github.com/pahud/cdk-soca/issues/159)) ([7290abe](https://github.com/pahud/cdk-soca/commit/7290abe54101d10e3cae2cab58d1ff8d37c19688))
+
+### [0.1.133](https://github.com/pahud/cdk-soca/compare/v0.1.132...v0.1.133) (2021-02-18)
+
+
+### Bug Fixes
+
+* scope down the ES principals ([4a308c9](https://github.com/pahud/cdk-soca/commit/4a308c9b821903f3378c0b5c5dfecdc5808bfc06))
+
+### [0.1.132](https://github.com/pahud/cdk-soca/compare/v0.1.131...v0.1.132) (2021-02-18)
+
+### [0.1.131](https://github.com/pahud/cdk-soca/compare/v0.1.130...v0.1.131) (2021-02-17)
+
+### [0.1.130](https://github.com/pahud/cdk-soca/compare/v0.1.129...v0.1.130) (2021-02-16)
+
+### [0.1.129](https://github.com/pahud/cdk-soca/compare/v0.1.128...v0.1.129) (2021-02-15)
+
+### [0.1.128](https://github.com/pahud/cdk-soca/compare/v0.1.127...v0.1.128) (2021-02-14)
+
+### [0.1.127](https://github.com/pahud/cdk-soca/compare/v0.1.126...v0.1.127) (2021-02-13)
+
+### [0.1.126](https://github.com/pahud/cdk-soca/compare/v0.1.125...v0.1.126) (2021-02-12)
+
+### [0.1.125](https://github.com/pahud/cdk-soca/compare/v0.1.124...v0.1.125) (2021-02-11)
+
+### [0.1.124](https://github.com/pahud/cdk-soca/compare/v0.1.123...v0.1.124) (2021-02-10)
+
+### [0.1.123](https://github.com/pahud/cdk-soca/compare/v0.1.122...v0.1.123) (2021-02-09)
+
+### [0.1.122](https://github.com/pahud/cdk-soca/compare/v0.1.121...v0.1.122) (2021-02-08)
+
+### [0.1.121](https://github.com/pahud/cdk-soca/compare/v0.1.120...v0.1.121) (2021-02-07)
+
+
+### Bug Fixes
+
+* defaultReleaseBranch ([d9d2431](https://github.com/pahud/cdk-soca/commit/d9d2431e134f039686de0055995a2b23ec8a2b26))
+
+### [0.1.120](https://github.com/pahud/cdk-soca/compare/v0.1.119...v0.1.120) (2021-02-07)
+
+### [0.1.119](https://github.com/pahud/cdk-soca/compare/v0.1.118...v0.1.119) (2021-02-03)
+
+### [0.1.118](https://github.com/pahud/cdk-soca/compare/v0.1.117...v0.1.118) (2021-02-02)
+
+### [0.1.117](https://github.com/pahud/cdk-soca/compare/v0.1.116...v0.1.117) (2021-02-01)
+
+### [0.1.116](https://github.com/pahud/cdk-soca/compare/v0.1.115...v0.1.116) (2021-01-30)
+
+### [0.1.115](https://github.com/pahud/cdk-soca/compare/v0.1.114...v0.1.115) (2021-01-29)
+
+### [0.1.114](https://github.com/pahud/cdk-soca/compare/v0.1.113...v0.1.114) (2021-01-28)
+
 ### [0.1.113](https://github.com/pahud/cdk-soca/compare/v0.1.112...v0.1.113) (2021-01-12)
 
 ### [0.1.112](https://github.com/pahud/cdk-soca/compare/v0.1.111...v0.1.112) (2021-01-11)

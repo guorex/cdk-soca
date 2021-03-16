@@ -8,26 +8,42 @@ export interface AnalyticsProps {
   readonly schedulerSecurityGroup: ec2.ISecurityGroup;
   readonly clusterId: string;
   readonly domainName?: string;
+  readonly clientIpCidr?: string;
+  readonly sechedulerPublicIp: string;
+  /**
+   * removal policy for the ES
+   *
+   * @default RemovalPolicy.DESTROY
+   */
+  readonly removalPolicy?: cdk.RemovalPolicy;
+  // readonly eipNat?: string;
 }
 
 export class Analytics extends cdk.Construct {
+  readonly vpc: ec2.IVpc;
   constructor(scope: cdk.Construct, id: string, props: AnalyticsProps) {
     super(scope, id);
 
     const region = cdk.Stack.of(this).region;
     const account = cdk.Stack.of(this).account;
-    // const stack = cdk.Stack.of(this);
     const esDomainName = props.domainName ?? props.clusterId;
 
+    this.vpc = props.vpc;
+
     // PolicyName: ElasticsearchPermissions
+    const trustedSourceIpCidr = [
+      `${props.sechedulerPublicIp}/32`,
+    ];
+    if (props.clientIpCidr) trustedSourceIpCidr.push(props.clientIpCidr);
     const elasticsearchPermissionsPolicy = new iam.PolicyStatement({
       effect: iam.Effect.ALLOW,
       actions: [
         'es:ESHttp*',
       ],
-      principals: [
-        new iam.AnyPrincipal,
-      ],
+      principals: [new iam.AccountRootPrincipal()],
+      conditions: {
+        IpAddress: { 'aws:SourceIp': trustedSourceIpCidr },
+      },
       resources: [`arn:aws:es:${region}:${account}:domain/${esDomainName}/*`],
     });
 
@@ -45,7 +61,6 @@ export class Analytics extends cdk.Construct {
         enabled: true,
       },
       capacity: {
-        masterNodes: 3,
         masterNodeInstanceType: 'm5.large.elasticsearch',
         dataNodes: 2,
         dataNodeInstanceType: 'm5.large.elasticsearch',
@@ -63,12 +78,10 @@ export class Analytics extends cdk.Construct {
         appLogEnabled: true,
         slowIndexLogEnabled: true,
       },
+      removalPolicy: props.removalPolicy ?? cdk.RemovalPolicy.DESTROY,
     });
 
     new cdk.CfnOutput(this, 'ESDomainArn:', { value: esDomain.domainArn });
     new cdk.CfnOutput(this, 'ESDomainEndpoint:', { value: esDomain.domainEndpoint });
-
   }
-
-
 }

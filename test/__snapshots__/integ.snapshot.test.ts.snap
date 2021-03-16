@@ -91,6 +91,10 @@ Object {
       "Description": "S3 key for asset version \\"4a3609ad912843e581892f37ae9d6fb0fa1648b547693aaa562b0119452b8956\\"",
       "Type": "String",
     },
+    "SsmParameterValueawsserviceamiamazonlinuxlatestamzn2amihvmx8664gp2C96584B6F00A464EAD1953AFF4B05118Parameter": Object {
+      "Default": "/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2",
+      "Type": "AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>",
+    },
   },
   "Resources": Object {
     "AWS679f53fac002430cb0da5b7982bd22872D164C4C": Object {
@@ -179,25 +183,11 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
-<<<<<<< HEAD
-    "AnalyticsAppLogsC8741D7D": Object {
-      "DeletionPolicy": "Retain",
-      "Properties": Object {
-        "RetentionInDays": 30,
-      },
-      "Type": "AWS::Logs::LogGroup",
-      "UpdateReplacePolicy": "Retain",
-    },
     "AnalyticsElasticsearchDomain1703D8ED": Object {
-      "DependsOn": Array [
-        "AnalyticsElasticsearchDomainESLogGroupPolicyCustomResourcePolicy18620FAC",
-        "AnalyticsElasticsearchDomainESLogGroupPolicyD87D536C",
-=======
-    "AnalyticsElasticsearchDomain1703D8ED": Object {
+      "DeletionPolicy": "Delete",
       "DependsOn": Array [
         "AnalyticsElasticsearchDomainESLogGroupPolicyc84d1f90df20fc947b9f9aad57f8157fbf95be4f6fCustomResourcePolicyECF8AEC3",
         "AnalyticsElasticsearchDomainESLogGroupPolicyc84d1f90df20fc947b9f9aad57f8157fbf95be4f6fDD7157E0",
->>>>>>> 3b17f515b3a49ff86d6f75223ae71c04a36ac8c0
       ],
       "Properties": Object {
         "CognitoOptions": Object {
@@ -214,9 +204,7 @@ Object {
           "VolumeType": "gp2",
         },
         "ElasticsearchClusterConfig": Object {
-          "DedicatedMasterCount": 3,
-          "DedicatedMasterEnabled": true,
-          "DedicatedMasterType": "m5.large.elasticsearch",
+          "DedicatedMasterEnabled": false,
           "InstanceCount": 2,
           "InstanceType": "m5.large.elasticsearch",
           "ZoneAwarenessConfig": Object {
@@ -229,20 +217,10 @@ Object {
           "Enabled": true,
         },
         "LogPublishingOptions": Object {
-<<<<<<< HEAD
           "ES_APPLICATION_LOGS": Object {
             "CloudWatchLogsLogGroupArn": Object {
               "Fn::GetAtt": Array [
                 "AnalyticsAppLogsC8741D7D",
-=======
-          "AUDIT_LOGS": Object {
-            "Enabled": false,
-          },
-          "ES_APPLICATION_LOGS": Object {
-            "CloudWatchLogsLogGroupArn": Object {
-              "Fn::GetAtt": Array [
-                "AnalyticsElasticsearchDomainAppLogs1E6C0316",
->>>>>>> 3b17f515b3a49ff86d6f75223ae71c04a36ac8c0
                 "Arn",
               ],
             },
@@ -251,11 +229,7 @@ Object {
           "INDEX_SLOW_LOGS": Object {
             "CloudWatchLogsLogGroupArn": Object {
               "Fn::GetAtt": Array [
-<<<<<<< HEAD
-                "AnalyticsSlowIndexLogsD4D980FE",
-=======
                 "AnalyticsElasticsearchDomainSlowIndexLogsB822CCCB",
->>>>>>> 3b17f515b3a49ff86d6f75223ae71c04a36ac8c0
                 "Arn",
               ],
             },
@@ -264,11 +238,7 @@ Object {
           "SEARCH_SLOW_LOGS": Object {
             "CloudWatchLogsLogGroupArn": Object {
               "Fn::GetAtt": Array [
-<<<<<<< HEAD
-                "AnalyticsSlowSearchLogs06E3F30D",
-=======
                 "AnalyticsElasticsearchDomainSlowSearchLogs94984D80",
->>>>>>> 3b17f515b3a49ff86d6f75223ae71c04a36ac8c0
                 "Arn",
               ],
             },
@@ -280,9 +250,8 @@ Object {
         },
       },
       "Type": "AWS::Elasticsearch::Domain",
+      "UpdateReplacePolicy": "Delete",
     },
-<<<<<<< HEAD
-=======
     "AnalyticsElasticsearchDomainAppLogs1E6C0316": Object {
       "DeletionPolicy": "Retain",
       "Properties": Object {
@@ -291,7 +260,6 @@ Object {
       "Type": "AWS::Logs::LogGroup",
       "UpdateReplacePolicy": "Retain",
     },
->>>>>>> 3b17f515b3a49ff86d6f75223ae71c04a36ac8c0
     "AnalyticsElasticsearchDomainESAccessPolicyB72C0E7C": Object {
       "DeletionPolicy": "Delete",
       "DependsOn": Array [
@@ -307,7 +275,19 @@ Object {
               "Fn::Join": Array [
                 "",
                 Array [
-                  "{\\"Statement\\":[{\\"Action\\":\\"es:ESHttp*\\",\\"Effect\\":\\"Allow\\",\\"Principal\\":\\"*\\",\\"Resource\\":\\"arn:aws:es:ap-northeast-1:",
+                  "{\\"Statement\\":[{\\"Action\\":\\"es:ESHttp*\\",\\"Condition\\":{\\"IpAddress\\":{\\"aws:SourceIp\\":[\\"",
+                  Object {
+                    "Ref": "SchedulerEIPScheduler20314FED",
+                  },
+                  "/32\\"]}},\\"Effect\\":\\"Allow\\",\\"Principal\\":{\\"AWS\\":\\"arn:",
+                  Object {
+                    "Ref": "AWS::Partition",
+                  },
+                  ":iam::",
+                  Object {
+                    "Ref": "AWS::AccountId",
+                  },
+                  ":root\\"},\\"Resource\\":\\"arn:aws:es:ap-northeast-1:",
                   Object {
                     "Ref": "AWS::AccountId",
                   },
@@ -349,7 +329,19 @@ Object {
               "Fn::Join": Array [
                 "",
                 Array [
-                  "{\\"Statement\\":[{\\"Action\\":\\"es:ESHttp*\\",\\"Effect\\":\\"Allow\\",\\"Principal\\":\\"*\\",\\"Resource\\":\\"arn:aws:es:ap-northeast-1:",
+                  "{\\"Statement\\":[{\\"Action\\":\\"es:ESHttp*\\",\\"Condition\\":{\\"IpAddress\\":{\\"aws:SourceIp\\":[\\"",
+                  Object {
+                    "Ref": "SchedulerEIPScheduler20314FED",
+                  },
+                  "/32\\"]}},\\"Effect\\":\\"Allow\\",\\"Principal\\":{\\"AWS\\":\\"arn:",
+                  Object {
+                    "Ref": "AWS::Partition",
+                  },
+                  ":iam::",
+                  Object {
+                    "Ref": "AWS::AccountId",
+                  },
+                  ":root\\"},\\"Resource\\":\\"arn:aws:es:ap-northeast-1:",
                   Object {
                     "Ref": "AWS::AccountId",
                   },
@@ -409,11 +401,7 @@ Object {
       },
       "Type": "AWS::IAM::Policy",
     },
-<<<<<<< HEAD
-    "AnalyticsElasticsearchDomainESLogGroupPolicyCustomResourcePolicy18620FAC": Object {
-=======
     "AnalyticsElasticsearchDomainESLogGroupPolicyc84d1f90df20fc947b9f9aad57f8157fbf95be4f6fCustomResourcePolicyECF8AEC3": Object {
->>>>>>> 3b17f515b3a49ff86d6f75223ae71c04a36ac8c0
       "Properties": Object {
         "PolicyDocument": Object {
           "Statement": Array [
@@ -430,11 +418,7 @@ Object {
           ],
           "Version": "2012-10-17",
         },
-<<<<<<< HEAD
-        "PolicyName": "AnalyticsElasticsearchDomainESLogGroupPolicyCustomResourcePolicy18620FAC",
-=======
         "PolicyName": "AnalyticsElasticsearchDomainESLogGroupPolicyc84d1f90df20fc947b9f9aad57f8157fbf95be4f6fCustomResourcePolicyECF8AEC3",
->>>>>>> 3b17f515b3a49ff86d6f75223ae71c04a36ac8c0
         "Roles": Array [
           Object {
             "Ref": "AWS679f53fac002430cb0da5b7982bd2287ServiceRoleC1EA0FF2",
@@ -443,17 +427,10 @@ Object {
       },
       "Type": "AWS::IAM::Policy",
     },
-<<<<<<< HEAD
-    "AnalyticsElasticsearchDomainESLogGroupPolicyD87D536C": Object {
-      "DeletionPolicy": "Delete",
-      "DependsOn": Array [
-        "AnalyticsElasticsearchDomainESLogGroupPolicyCustomResourcePolicy18620FAC",
-=======
     "AnalyticsElasticsearchDomainESLogGroupPolicyc84d1f90df20fc947b9f9aad57f8157fbf95be4f6fDD7157E0": Object {
       "DeletionPolicy": "Delete",
       "DependsOn": Array [
         "AnalyticsElasticsearchDomainESLogGroupPolicyc84d1f90df20fc947b9f9aad57f8157fbf95be4f6fCustomResourcePolicyECF8AEC3",
->>>>>>> 3b17f515b3a49ff86d6f75223ae71c04a36ac8c0
       ],
       "Properties": Object {
         "Create": Object {
@@ -466,33 +443,21 @@ Object {
                   "{\\"Statement\\":[{\\"Action\\":[\\"logs:PutLogEvents\\",\\"logs:CreateLogStream\\"],\\"Effect\\":\\"Allow\\",\\"Principal\\":{\\"Service\\":\\"es.amazonaws.com\\"},\\"Resource\\":[\\"",
                   Object {
                     "Fn::GetAtt": Array [
-<<<<<<< HEAD
-                      "AnalyticsSlowSearchLogs06E3F30D",
-=======
                       "AnalyticsElasticsearchDomainSlowSearchLogs94984D80",
->>>>>>> 3b17f515b3a49ff86d6f75223ae71c04a36ac8c0
                       "Arn",
                     ],
                   },
                   "\\",\\"",
                   Object {
                     "Fn::GetAtt": Array [
-<<<<<<< HEAD
-                      "AnalyticsSlowIndexLogsD4D980FE",
-=======
                       "AnalyticsElasticsearchDomainSlowIndexLogsB822CCCB",
->>>>>>> 3b17f515b3a49ff86d6f75223ae71c04a36ac8c0
                       "Arn",
                     ],
                   },
                   "\\",\\"",
                   Object {
                     "Fn::GetAtt": Array [
-<<<<<<< HEAD
-                      "AnalyticsAppLogsC8741D7D",
-=======
                       "AnalyticsElasticsearchDomainAppLogs1E6C0316",
->>>>>>> 3b17f515b3a49ff86d6f75223ae71c04a36ac8c0
                       "Arn",
                     ],
                   },
@@ -500,17 +465,10 @@ Object {
                 ],
               ],
             },
-<<<<<<< HEAD
-            "policyName": "ESLogPolicy",
-          },
-          "physicalResourceId": Object {
-            "id": "ESLogGroupPolicy",
-=======
             "policyName": "ESLogPolicyc84d1f90df20fc947b9f9aad57f8157fbf95be4f6f",
           },
           "physicalResourceId": Object {
             "id": "ESLogGroupPolicyc84d1f90df20fc947b9f9aad57f8157fbf95be4f6f",
->>>>>>> 3b17f515b3a49ff86d6f75223ae71c04a36ac8c0
           },
           "service": "CloudWatchLogs",
         },
@@ -518,11 +476,7 @@ Object {
           "action": "deleteResourcePolicy",
           "ignoreErrorCodesMatching": "400",
           "parameters": Object {
-<<<<<<< HEAD
-            "policyName": "ESLogPolicy",
-=======
             "policyName": "ESLogPolicyc84d1f90df20fc947b9f9aad57f8157fbf95be4f6f",
->>>>>>> 3b17f515b3a49ff86d6f75223ae71c04a36ac8c0
           },
           "service": "CloudWatchLogs",
         },
@@ -543,33 +497,21 @@ Object {
                   "{\\"Statement\\":[{\\"Action\\":[\\"logs:PutLogEvents\\",\\"logs:CreateLogStream\\"],\\"Effect\\":\\"Allow\\",\\"Principal\\":{\\"Service\\":\\"es.amazonaws.com\\"},\\"Resource\\":[\\"",
                   Object {
                     "Fn::GetAtt": Array [
-<<<<<<< HEAD
-                      "AnalyticsSlowSearchLogs06E3F30D",
-=======
                       "AnalyticsElasticsearchDomainSlowSearchLogs94984D80",
->>>>>>> 3b17f515b3a49ff86d6f75223ae71c04a36ac8c0
                       "Arn",
                     ],
                   },
                   "\\",\\"",
                   Object {
                     "Fn::GetAtt": Array [
-<<<<<<< HEAD
-                      "AnalyticsSlowIndexLogsD4D980FE",
-=======
                       "AnalyticsElasticsearchDomainSlowIndexLogsB822CCCB",
->>>>>>> 3b17f515b3a49ff86d6f75223ae71c04a36ac8c0
                       "Arn",
                     ],
                   },
                   "\\",\\"",
                   Object {
                     "Fn::GetAtt": Array [
-<<<<<<< HEAD
-                      "AnalyticsAppLogsC8741D7D",
-=======
                       "AnalyticsElasticsearchDomainAppLogs1E6C0316",
->>>>>>> 3b17f515b3a49ff86d6f75223ae71c04a36ac8c0
                       "Arn",
                     ],
                   },
@@ -577,17 +519,10 @@ Object {
                 ],
               ],
             },
-<<<<<<< HEAD
-            "policyName": "ESLogPolicy",
-          },
-          "physicalResourceId": Object {
-            "id": "ESLogGroupPolicy",
-=======
             "policyName": "ESLogPolicyc84d1f90df20fc947b9f9aad57f8157fbf95be4f6f",
           },
           "physicalResourceId": Object {
             "id": "ESLogGroupPolicyc84d1f90df20fc947b9f9aad57f8157fbf95be4f6f",
->>>>>>> 3b17f515b3a49ff86d6f75223ae71c04a36ac8c0
           },
           "service": "CloudWatchLogs",
         },
@@ -595,11 +530,7 @@ Object {
       "Type": "Custom::CloudwatchLogResourcePolicy",
       "UpdateReplacePolicy": "Delete",
     },
-<<<<<<< HEAD
-    "AnalyticsSlowIndexLogsD4D980FE": Object {
-=======
     "AnalyticsElasticsearchDomainSlowIndexLogsB822CCCB": Object {
->>>>>>> 3b17f515b3a49ff86d6f75223ae71c04a36ac8c0
       "DeletionPolicy": "Retain",
       "Properties": Object {
         "RetentionInDays": 30,
@@ -607,11 +538,7 @@ Object {
       "Type": "AWS::Logs::LogGroup",
       "UpdateReplacePolicy": "Retain",
     },
-<<<<<<< HEAD
-    "AnalyticsSlowSearchLogs06E3F30D": Object {
-=======
     "AnalyticsElasticsearchDomainSlowSearchLogs94984D80": Object {
->>>>>>> 3b17f515b3a49ff86d6f75223ae71c04a36ac8c0
       "DeletionPolicy": "Retain",
       "Properties": Object {
         "RetentionInDays": 30,
@@ -1896,7 +1823,9 @@ Object {
         "IamInstanceProfile": Object {
           "Ref": "SchedulerInstanceProfileE3AED890",
         },
-        "ImageId": "ami-0c3fd0f5d33134a76",
+        "ImageId": Object {
+          "Ref": "SsmParameterValueawsserviceamiamazonlinuxlatestamzn2amihvmx8664gp2C96584B6F00A464EAD1953AFF4B05118Parameter",
+        },
         "InstanceType": "m5.large",
         "SecurityGroupIds": Array [
           Object {
@@ -1965,7 +1894,11 @@ echo export \\"AWS_DEFAULT_REGION=ap-northeast-1 \\" >> /etc/environment
 echo export \\"SOCA_INSTALL_BUCKET=solutions-reference\\" >> /etc/environment
 echo export \\"SOCA_INSTALL_BUCKET_FOLDER=scale-out-computing-on-aws/v2.5.0\\" >> /etc/environment
 echo export \\"SOCA_VERSION=2.5.0\\" >> /etc/environment
-echo export \\"SOCA_INSTALL_AMI=ami-0c3fd0f5d33134a76\\" >> /etc/environment
+echo export \\"SOCA_INSTALL_AMI=",
+                Object {
+                  "Ref": "SsmParameterValueawsserviceamiamazonlinuxlatestamzn2amihvmx8664gp2C96584B6F00A464EAD1953AFF4B05118Parameter",
+                },
+                "\\" >> /etc/environment
 source /etc/environment
 
 # Tag EBS disks manually as CFN ASG does not support it
@@ -2013,9 +1946,7 @@ $AWS s3 cp s3://solutions-reference/scale-out-computing-on-aws/v2.5.0/scripts/Sc
     },
     "SchedulerEIPScheduler20314FED": Object {
       "Properties": Object {
-        "Domain": Object {
-          "Ref": "SocaNetworkVpcEDB8981E",
-        },
+        "Domain": "vpc",
         "InstanceId": Object {
           "Ref": "Scheduler55EE85DC",
         },
@@ -2970,8 +2901,24 @@ $AWS s3 cp s3://solutions-reference/scale-out-computing-on-aws/v2.5.0/scripts/Sc
         "SecurityGroupEgress": Array [
           Object {
             "CidrIp": "0.0.0.0/0",
-            "Description": "Allow all outbound traffic by default",
-            "IpProtocol": "-1",
+            "Description": "from 0.0.0.0/0:ALL PORTS",
+            "FromPort": 0,
+            "IpProtocol": "tcp",
+            "ToPort": 65535,
+          },
+          Object {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "from 0.0.0.0/0:UDP ALL PORTS",
+            "FromPort": 0,
+            "IpProtocol": "udp",
+            "ToPort": 65535,
+          },
+          Object {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "from 0.0.0.0/0:ALL ICMP",
+            "FromPort": -1,
+            "IpProtocol": "icmp",
+            "ToPort": -1,
           },
         ],
         "VpcId": Object {
@@ -2980,43 +2927,236 @@ $AWS s3 cp s3://solutions-reference/scale-out-computing-on-aws/v2.5.0/scripts/Sc
       },
       "Type": "AWS::EC2::SecurityGroup",
     },
-    "WorkloadComputeNodeSecurityGroupfromsocatestingstackWorkloadComputeNodeSecurityGroup95042CF2ALLTRAFFIC3E554A86": Object {
+    "WorkloadComputeNodeSecurityGroupfromsocatestingstackWorkloadComputeNodeSecurityGroup95042CF2ALLICMP064DC02F": Object {
       "Properties": Object {
-        "Description": "from socatestingstackWorkloadComputeNodeSecurityGroup95042CF2:ALL TRAFFIC",
+        "Description": "from socatestingstackWorkloadComputeNodeSecurityGroup95042CF2:ALL ICMP",
+        "FromPort": -1,
         "GroupId": Object {
           "Fn::GetAtt": Array [
             "WorkloadComputeNodeSecurityGroupC11D647D",
             "GroupId",
           ],
         },
-        "IpProtocol": "-1",
+        "IpProtocol": "icmp",
         "SourceSecurityGroupId": Object {
           "Fn::GetAtt": Array [
             "WorkloadComputeNodeSecurityGroupC11D647D",
             "GroupId",
           ],
         },
+        "ToPort": -1,
       },
       "Type": "AWS::EC2::SecurityGroupIngress",
     },
-    "WorkloadComputeNodeSecurityGroupfromsocatestingstackWorkloadSchedulerSecurityGroup7E5A7062ALLTRAFFIC139E7349": Object {
+    "WorkloadComputeNodeSecurityGroupfromsocatestingstackWorkloadComputeNodeSecurityGroup95042CF2ALLPORTS68F3EC16": Object {
       "Properties": Object {
-        "Description": "from socatestingstackWorkloadSchedulerSecurityGroup7E5A7062:ALL TRAFFIC",
+        "Description": "from socatestingstackWorkloadComputeNodeSecurityGroup95042CF2:ALL PORTS",
+        "FromPort": 0,
         "GroupId": Object {
           "Fn::GetAtt": Array [
             "WorkloadComputeNodeSecurityGroupC11D647D",
             "GroupId",
           ],
         },
-        "IpProtocol": "-1",
+        "IpProtocol": "tcp",
+        "SourceSecurityGroupId": Object {
+          "Fn::GetAtt": Array [
+            "WorkloadComputeNodeSecurityGroupC11D647D",
+            "GroupId",
+          ],
+        },
+        "ToPort": 65535,
+      },
+      "Type": "AWS::EC2::SecurityGroupIngress",
+    },
+    "WorkloadComputeNodeSecurityGroupfromsocatestingstackWorkloadComputeNodeSecurityGroup95042CF2UDPALLPORTSC491A6EB": Object {
+      "Properties": Object {
+        "Description": "from socatestingstackWorkloadComputeNodeSecurityGroup95042CF2:UDP ALL PORTS",
+        "FromPort": 0,
+        "GroupId": Object {
+          "Fn::GetAtt": Array [
+            "WorkloadComputeNodeSecurityGroupC11D647D",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "udp",
+        "SourceSecurityGroupId": Object {
+          "Fn::GetAtt": Array [
+            "WorkloadComputeNodeSecurityGroupC11D647D",
+            "GroupId",
+          ],
+        },
+        "ToPort": 65535,
+      },
+      "Type": "AWS::EC2::SecurityGroupIngress",
+    },
+    "WorkloadComputeNodeSecurityGroupfromsocatestingstackWorkloadSchedulerSecurityGroup7E5A7062ALLPORTS145EAF9C": Object {
+      "Properties": Object {
+        "Description": "from socatestingstackWorkloadSchedulerSecurityGroup7E5A7062:ALL PORTS",
+        "FromPort": 0,
+        "GroupId": Object {
+          "Fn::GetAtt": Array [
+            "WorkloadComputeNodeSecurityGroupC11D647D",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
         "SourceSecurityGroupId": Object {
           "Fn::GetAtt": Array [
             "WorkloadSchedulerSecurityGroup35115701",
             "GroupId",
           ],
         },
+        "ToPort": 65535,
       },
       "Type": "AWS::EC2::SecurityGroupIngress",
+    },
+    "WorkloadComputeNodeSecurityGroupfromsocatestingstackWorkloadSchedulerSecurityGroup7E5A7062UDPALLPORTSD00A9DDE": Object {
+      "Properties": Object {
+        "Description": "from socatestingstackWorkloadSchedulerSecurityGroup7E5A7062:UDP ALL PORTS",
+        "FromPort": 0,
+        "GroupId": Object {
+          "Fn::GetAtt": Array [
+            "WorkloadComputeNodeSecurityGroupC11D647D",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "udp",
+        "SourceSecurityGroupId": Object {
+          "Fn::GetAtt": Array [
+            "WorkloadSchedulerSecurityGroup35115701",
+            "GroupId",
+          ],
+        },
+        "ToPort": 65535,
+      },
+      "Type": "AWS::EC2::SecurityGroupIngress",
+    },
+    "WorkloadComputeNodeSecurityGrouptosocatestingstackWorkloadComputeNodeSecurityGroup95042CF2ALLICMP34470054": Object {
+      "Properties": Object {
+        "Description": "to socatestingstackWorkloadComputeNodeSecurityGroup95042CF2:ALL ICMP",
+        "DestinationSecurityGroupId": Object {
+          "Fn::GetAtt": Array [
+            "WorkloadComputeNodeSecurityGroupC11D647D",
+            "GroupId",
+          ],
+        },
+        "FromPort": -1,
+        "GroupId": Object {
+          "Fn::GetAtt": Array [
+            "WorkloadComputeNodeSecurityGroupC11D647D",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "icmp",
+        "ToPort": -1,
+      },
+      "Type": "AWS::EC2::SecurityGroupEgress",
+    },
+    "WorkloadComputeNodeSecurityGrouptosocatestingstackWorkloadComputeNodeSecurityGroup95042CF2ALLPORTS9FB65BE9": Object {
+      "Properties": Object {
+        "Description": "to socatestingstackWorkloadComputeNodeSecurityGroup95042CF2:ALL PORTS",
+        "DestinationSecurityGroupId": Object {
+          "Fn::GetAtt": Array [
+            "WorkloadComputeNodeSecurityGroupC11D647D",
+            "GroupId",
+          ],
+        },
+        "FromPort": 0,
+        "GroupId": Object {
+          "Fn::GetAtt": Array [
+            "WorkloadComputeNodeSecurityGroupC11D647D",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "ToPort": 65535,
+      },
+      "Type": "AWS::EC2::SecurityGroupEgress",
+    },
+    "WorkloadComputeNodeSecurityGrouptosocatestingstackWorkloadComputeNodeSecurityGroup95042CF2UDPALLPORTSAB4A9A40": Object {
+      "Properties": Object {
+        "Description": "to socatestingstackWorkloadComputeNodeSecurityGroup95042CF2:UDP ALL PORTS",
+        "DestinationSecurityGroupId": Object {
+          "Fn::GetAtt": Array [
+            "WorkloadComputeNodeSecurityGroupC11D647D",
+            "GroupId",
+          ],
+        },
+        "FromPort": 0,
+        "GroupId": Object {
+          "Fn::GetAtt": Array [
+            "WorkloadComputeNodeSecurityGroupC11D647D",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "udp",
+        "ToPort": 65535,
+      },
+      "Type": "AWS::EC2::SecurityGroupEgress",
+    },
+    "WorkloadComputeNodeSecurityGrouptosocatestingstackWorkloadSchedulerSecurityGroup7E5A7062ALLICMPA7A6AD9C": Object {
+      "Properties": Object {
+        "Description": "to socatestingstackWorkloadSchedulerSecurityGroup7E5A7062:ALL ICMP",
+        "DestinationSecurityGroupId": Object {
+          "Fn::GetAtt": Array [
+            "WorkloadSchedulerSecurityGroup35115701",
+            "GroupId",
+          ],
+        },
+        "FromPort": -1,
+        "GroupId": Object {
+          "Fn::GetAtt": Array [
+            "WorkloadComputeNodeSecurityGroupC11D647D",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "icmp",
+        "ToPort": -1,
+      },
+      "Type": "AWS::EC2::SecurityGroupEgress",
+    },
+    "WorkloadComputeNodeSecurityGrouptosocatestingstackWorkloadSchedulerSecurityGroup7E5A7062ALLPORTSC3C7E02D": Object {
+      "Properties": Object {
+        "Description": "to socatestingstackWorkloadSchedulerSecurityGroup7E5A7062:ALL PORTS",
+        "DestinationSecurityGroupId": Object {
+          "Fn::GetAtt": Array [
+            "WorkloadSchedulerSecurityGroup35115701",
+            "GroupId",
+          ],
+        },
+        "FromPort": 0,
+        "GroupId": Object {
+          "Fn::GetAtt": Array [
+            "WorkloadComputeNodeSecurityGroupC11D647D",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "ToPort": 65535,
+      },
+      "Type": "AWS::EC2::SecurityGroupEgress",
+    },
+    "WorkloadComputeNodeSecurityGrouptosocatestingstackWorkloadSchedulerSecurityGroup7E5A7062UDPALLPORTSAAD25A76": Object {
+      "Properties": Object {
+        "Description": "to socatestingstackWorkloadSchedulerSecurityGroup7E5A7062:UDP ALL PORTS",
+        "DestinationSecurityGroupId": Object {
+          "Fn::GetAtt": Array [
+            "WorkloadSchedulerSecurityGroup35115701",
+            "GroupId",
+          ],
+        },
+        "FromPort": 0,
+        "GroupId": Object {
+          "Fn::GetAtt": Array [
+            "WorkloadComputeNodeSecurityGroupC11D647D",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "udp",
+        "ToPort": 65535,
+      },
+      "Type": "AWS::EC2::SecurityGroupEgress",
     },
     "WorkloadSchedulerSecurityGroup35115701": Object {
       "Properties": Object {
@@ -3024,8 +3164,24 @@ $AWS s3 cp s3://solutions-reference/scale-out-computing-on-aws/v2.5.0/scripts/Sc
         "SecurityGroupEgress": Array [
           Object {
             "CidrIp": "0.0.0.0/0",
-            "Description": "Allow all outbound traffic by default",
-            "IpProtocol": "-1",
+            "Description": "from 0.0.0.0/0:ALL PORTS",
+            "FromPort": 0,
+            "IpProtocol": "tcp",
+            "ToPort": 65535,
+          },
+          Object {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "from 0.0.0.0/0:UDP ALL PORTS",
+            "FromPort": 0,
+            "IpProtocol": "udp",
+            "ToPort": 65535,
+          },
+          Object {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "from 0.0.0.0/0:ALL ICMP",
+            "FromPort": -1,
+            "IpProtocol": "icmp",
+            "ToPort": -1,
           },
         ],
         "VpcId": Object {
@@ -3034,22 +3190,66 @@ $AWS s3 cp s3://solutions-reference/scale-out-computing-on-aws/v2.5.0/scripts/Sc
       },
       "Type": "AWS::EC2::SecurityGroup",
     },
-    "WorkloadSchedulerSecurityGroupfromsocatestingstackWorkloadComputeNodeSecurityGroup95042CF2ALLTRAFFIC0582CD26": Object {
+    "WorkloadSchedulerSecurityGroupfromsocatestingstackWorkloadComputeNodeSecurityGroup95042CF2ALLICMPB9F659FB": Object {
       "Properties": Object {
-        "Description": "from socatestingstackWorkloadComputeNodeSecurityGroup95042CF2:ALL TRAFFIC",
+        "Description": "from socatestingstackWorkloadComputeNodeSecurityGroup95042CF2:ALL ICMP",
+        "FromPort": -1,
         "GroupId": Object {
           "Fn::GetAtt": Array [
             "WorkloadSchedulerSecurityGroup35115701",
             "GroupId",
           ],
         },
-        "IpProtocol": "-1",
+        "IpProtocol": "icmp",
         "SourceSecurityGroupId": Object {
           "Fn::GetAtt": Array [
             "WorkloadComputeNodeSecurityGroupC11D647D",
             "GroupId",
           ],
         },
+        "ToPort": -1,
+      },
+      "Type": "AWS::EC2::SecurityGroupIngress",
+    },
+    "WorkloadSchedulerSecurityGroupfromsocatestingstackWorkloadComputeNodeSecurityGroup95042CF2ALLPORTSD6A26B7A": Object {
+      "Properties": Object {
+        "Description": "from socatestingstackWorkloadComputeNodeSecurityGroup95042CF2:ALL PORTS",
+        "FromPort": 0,
+        "GroupId": Object {
+          "Fn::GetAtt": Array [
+            "WorkloadSchedulerSecurityGroup35115701",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "SourceSecurityGroupId": Object {
+          "Fn::GetAtt": Array [
+            "WorkloadComputeNodeSecurityGroupC11D647D",
+            "GroupId",
+          ],
+        },
+        "ToPort": 65535,
+      },
+      "Type": "AWS::EC2::SecurityGroupIngress",
+    },
+    "WorkloadSchedulerSecurityGroupfromsocatestingstackWorkloadComputeNodeSecurityGroup95042CF2UDPALLPORTS3387B325": Object {
+      "Properties": Object {
+        "Description": "from socatestingstackWorkloadComputeNodeSecurityGroup95042CF2:UDP ALL PORTS",
+        "FromPort": 0,
+        "GroupId": Object {
+          "Fn::GetAtt": Array [
+            "WorkloadSchedulerSecurityGroup35115701",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "udp",
+        "SourceSecurityGroupId": Object {
+          "Fn::GetAtt": Array [
+            "WorkloadComputeNodeSecurityGroupC11D647D",
+            "GroupId",
+          ],
+        },
+        "ToPort": 65535,
       },
       "Type": "AWS::EC2::SecurityGroupIngress",
     },
@@ -3073,6 +3273,69 @@ $AWS s3 cp s3://solutions-reference/scale-out-computing-on-aws/v2.5.0/scripts/Sc
         "ToPort": 8443,
       },
       "Type": "AWS::EC2::SecurityGroupIngress",
+    },
+    "WorkloadSchedulerSecurityGrouptosocatestingstackWorkloadComputeNodeSecurityGroup95042CF2ALLPORTS9DD0F027": Object {
+      "Properties": Object {
+        "Description": "to socatestingstackWorkloadComputeNodeSecurityGroup95042CF2:ALL PORTS",
+        "DestinationSecurityGroupId": Object {
+          "Fn::GetAtt": Array [
+            "WorkloadComputeNodeSecurityGroupC11D647D",
+            "GroupId",
+          ],
+        },
+        "FromPort": 0,
+        "GroupId": Object {
+          "Fn::GetAtt": Array [
+            "WorkloadSchedulerSecurityGroup35115701",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "ToPort": 65535,
+      },
+      "Type": "AWS::EC2::SecurityGroupEgress",
+    },
+    "WorkloadSchedulerSecurityGrouptosocatestingstackWorkloadComputeNodeSecurityGroup95042CF2UDPALLPORTS8D84C0AB": Object {
+      "Properties": Object {
+        "Description": "to socatestingstackWorkloadComputeNodeSecurityGroup95042CF2:UDP ALL PORTS",
+        "DestinationSecurityGroupId": Object {
+          "Fn::GetAtt": Array [
+            "WorkloadComputeNodeSecurityGroupC11D647D",
+            "GroupId",
+          ],
+        },
+        "FromPort": 0,
+        "GroupId": Object {
+          "Fn::GetAtt": Array [
+            "WorkloadSchedulerSecurityGroup35115701",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "udp",
+        "ToPort": 65535,
+      },
+      "Type": "AWS::EC2::SecurityGroupEgress",
+    },
+    "WorkloadSchedulerSecurityGrouptosocatestingstackWorkloadSchedulerSecurityGroup7E5A70628443BFE1D4D8": Object {
+      "Properties": Object {
+        "Description": "to socatestingstackWorkloadSchedulerSecurityGroup7E5A7062:8443",
+        "DestinationSecurityGroupId": Object {
+          "Fn::GetAtt": Array [
+            "WorkloadSchedulerSecurityGroup35115701",
+            "GroupId",
+          ],
+        },
+        "FromPort": 8443,
+        "GroupId": Object {
+          "Fn::GetAtt": Array [
+            "WorkloadSchedulerSecurityGroup35115701",
+            "GroupId",
+          ],
+        },
+        "IpProtocol": "tcp",
+        "ToPort": 8443,
+      },
+      "Type": "AWS::EC2::SecurityGroupEgress",
     },
   },
 }
