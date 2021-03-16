@@ -52,23 +52,6 @@
     "typescript": "^3.9.5"
   },
   "peerDependencies": {
-<<<<<<< HEAD
-    "@aws-cdk/aws-ec2": "^1.63.0",
-    "@aws-cdk/aws-efs": "^1.63.0",
-    "@aws-cdk/aws-elasticsearch": "^1.63.0",
-    "@aws-cdk/aws-iam": "^1.63.0",
-    "@aws-cdk/aws-s3": "^1.63.0",
-    "@aws-cdk/core": "^1.63.0",
-    "constructs": "^3.0.4"
-  },
-  "dependencies": {
-    "@aws-cdk/aws-ec2": "^1.63.0",
-    "@aws-cdk/aws-efs": "^1.63.0",
-    "@aws-cdk/aws-elasticsearch": "^1.63.0",
-    "@aws-cdk/aws-iam": "^1.63.0",
-    "@aws-cdk/aws-s3": "^1.63.0",
-    "@aws-cdk/core": "^1.63.0"
-=======
     "@aws-cdk/aws-ec2": "^1.77.0",
     "@aws-cdk/aws-efs": "^1.77.0",
     "@aws-cdk/aws-elasticsearch": "^1.77.0",
@@ -84,7 +67,6 @@
     "@aws-cdk/aws-iam": "^1.77.0",
     "@aws-cdk/aws-s3": "^1.77.0",
     "@aws-cdk/core": "^1.77.0"
->>>>>>> 3b17f515b3a49ff86d6f75223ae71c04a36ac8c0
   },
   "bundledDependencies": [],
   "keywords": [
